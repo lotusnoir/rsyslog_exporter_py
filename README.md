@@ -40,3 +40,9 @@ Please note `rsyslog_exporter.py` command line parameters:
 ### 4. Restart rsyslog if no errors found (`systemctl restart rsyslog` e.g.)
 ### 5. Go to http://localhost:9292/ to see metrics
 
+uubufr changelog:
+
+Added option -b allow specific listen address
+Note: for ipv6, you must add in /usr/lib/python2.7/site-packages/prometheus_client/expositions.py at class ThreadingWSGIServer: address_family = socket.AF_INET6
+
+

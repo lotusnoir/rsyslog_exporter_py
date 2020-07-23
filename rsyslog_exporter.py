@@ -247,6 +247,13 @@ def parse_args():
         default=os.environ.get('RSYSLOG_EXPORTER_LABELS', '').split(','),
         dest='labels',
     )
+
+    parser.add_argument(
+        '-b', '--bind-address',
+        help='listen address',
+        default='127.0.0.1',
+        dest='ip',
+    )
     return parser.parse_args()
 
 
@@ -279,7 +286,7 @@ def main():
         sys.stdin = stdin_unbuf
 
         # Start http server thread to expose metrics
-        start_http_server(args.port)
+        start_http_server(args.port, addr=args.ip)
         REGISTRY.register(RsyslogCollector(stats))
 
         sleep_seconds = args.down_after
