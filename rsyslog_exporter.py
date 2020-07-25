@@ -161,7 +161,7 @@ class RsyslogCollector(object):
             'rsyslog_exporter_version',
             'Version of rsyslog_exporter running',
             labels=['version'] + list(custom_label_names))
-        m.add_metric([__version__] + list(custom_label_values, 1.0)
+        m.add_metric([__version__] + list(custom_label_values), 1.0)
         yield m
 
         m = GaugeMetricFamily(
