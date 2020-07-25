@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Export rsyslog counters as prometheus metrics (impstats via omprog)
 
@@ -160,8 +160,8 @@ class RsyslogCollector(object):
         m = GaugeMetricFamily(
             'rsyslog_exporter_version',
             'Version of rsyslog_exporter running',
-            labels=['version'] + custom_label_names)
-        m.add_metric([__version__] + custom_label_values, 1.0)
+            labels=['version'] + list(custom_label_names))
+        m.add_metric([__version__] + list(custom_label_values, 1.0)
         yield m
 
         m = GaugeMetricFamily(
@@ -195,7 +195,7 @@ class RsyslogCollector(object):
         if not self._stats.is_up:
             return
 
-        label_names = ['name'] + custom_label_names
+        label_names = ['name'] + list(custom_label_names)
 
         for metric_name, v in self._stats.counters().items():
             if metric_name == 'rsyslog_core_queue_size':
@@ -204,7 +204,7 @@ class RsyslogCollector(object):
                 m = CounterMetricFamily(metric_name, '', labels=label_names)
 
             for name, value in v.items():
-                m.add_metric([name] + custom_label_values, value)
+                m.add_metric([name] + list(custom_label_values), value)
             yield m
 
 
@@ -320,8 +320,8 @@ def main():
                 while keep_running and sys.stdin in select.select([sys.stdin], [], [], 0)[0]:
                     line = sys.stdin.readline()
                     if line:
-                        json_start_idx = line.find('{')
-                        json_end_idx = line.rfind('}')
+                        json_start_idx = line.find(b'{')
+                        json_end_idx = line.rfind(b'}')
                         stats.parse(line[json_start_idx:json_end_idx + 1])
                     else:
                         # Exit when EOF received on stdin

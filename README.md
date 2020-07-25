@@ -1,3 +1,9 @@
+uubufr changelog:
+
+Added option -b allow specific listen address
+work with python3
+
+
 # rsyslog prometheus exporter
 
 This software is acting like a proxy. It reads rsyslog stats on stdin, convert them to the prometheus mertics and expose them via HTTP. Rsyslog stats are expected in 'json' format.
@@ -40,9 +46,5 @@ Please note `rsyslog_exporter.py` command line parameters:
 ### 4. Restart rsyslog if no errors found (`systemctl restart rsyslog` e.g.)
 ### 5. Go to http://localhost:9292/ to see metrics
 
-uubufr changelog:
-
-Added option -b allow specific listen address
-Note: for ipv6, you must add in /usr/lib/python2.7/site-packages/prometheus_client/expositions.py at class ThreadingWSGIServer: address_family = socket.AF_INET6
 
 
