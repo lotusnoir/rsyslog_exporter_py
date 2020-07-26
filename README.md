@@ -1,7 +1,8 @@
-uubufr changelog:
+### uubufr changelog:
 
-Added option -b allow specific listen address
-work with python3
+- Added option -b allow specific listen address
+
+- work with python3
 
 
 # rsyslog prometheus exporter
